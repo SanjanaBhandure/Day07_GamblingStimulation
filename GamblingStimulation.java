@@ -2,9 +2,10 @@ package com.Bridgelabz.Day07_GamblingStimulator;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GamblingStimulation {
-    static Logger logger = Logger.getLogger(GamblingStimulation.class);
+    static Logger logger = Logger.getLogger(GamblingStimulatorUC7.class);
     /*Static Variables created*/
     public static final int STAKE_PER_DAY = 100;            //Stake per Day
     public static final int BET_PER_GAME = 1;               //Bet per game
@@ -74,9 +75,24 @@ public class GamblingStimulation {
         logger.info(daysWonCount+ " Days won for a month \n" +daysLostCount+ " Days lost for a month");
     }
 
+
     public static void main(String[] args) {
         BasicConfigurator.configure();
         logger.info("Welcome to Gambling Simulation");
-        monthlyWinOrLossCheck();
+        /*
+         * If won would you like to continue playing next month or stop gambling.
+         */
+        while (true){
+            /*
+             * Using Scanner class taking input from the user to play or stop gambling.
+             */
+            Scanner sc = new Scanner(System.in);
+            logger.info("Enter 1 to play again or Enter 0 to Exit");
+            int choice = sc.nextInt();
+            if (choice == 0) {
+                break;
+            }
+            monthlyWinOrLossCheck();
+        }
     }
 }
