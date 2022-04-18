@@ -67,9 +67,9 @@ public class GamblingStimulation {
             }
         }
         if (totalStake < 0) {
-            System.out.println("After playing for 20 days Gambler lost total amount: $" +totalStake);
+            logger.info("After playing for 20 days Gambler lost total amount: $" +totalStake);
         } else {
-            System.out.println("After playing for 20 days Gambler won total amount: $" +totalStake);
+            logger.info("After playing for 20 days Gambler won total amount: $" +totalStake);
         }
         logger.info(daysWonCount+ " Days won for a month \n" +daysLostCount+ " Days lost for a month");
     }
