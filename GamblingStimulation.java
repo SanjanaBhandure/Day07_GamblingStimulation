@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import java.util.Random;
 
 public class GamblingStimulation {
-    static Logger logger = Logger.getLogger(GamblingStimulatorUC5.class);
+    static Logger logger = Logger.getLogger(GamblingStimulation.class);
     /*Static Variables created*/
     public static final int STAKE_PER_DAY = 100;            //Stake per Day
     public static final int BET_PER_GAME = 1;               //Bet per game
@@ -35,18 +35,20 @@ public class GamblingStimulation {
      */
 
     public static void resignDayCheck() {
-        int totalStake = 0;
         stake = 0;
         while (stake != 50 && stake != -50) {
             winCheck();
         }
-        totalStake = stake + STAKE_PER_DAY;
-        logger.info("Total stake for resign for a day is: " +totalStake);
+        logger.info("Total stake for resign for a day is: " +stake);
+
     }
 
     /*
      * After 20 days of playing every day would like to know the total amount won or
      * lost.
+     * Each month would like to know the days won and lost and by how much.
+     * Would also like to know my luckiest day, where I won maximum and my unluckiest day, where
+     * I lost minimum
      */
 
     public static void monthlyWinOrLossCheck() {
@@ -56,16 +58,18 @@ public class GamblingStimulation {
             resignDayCheck();
             if (stake == 50) {
                 daysWonCount++;
+                logger.info("It was my luckiest Day!!!");
                 totalStake = totalStake + stake;
             } else if (stake == -50) {
                 daysLostCount++;
                 totalStake = totalStake + stake;
+                logger.info("It was my unluckiest Day!!!");
             }
         }
         if (totalStake < 0) {
-            logger.info("After playing for 20 days Gambler lost total amount: $" +totalStake);
+            System.out.println("After playing for 20 days Gambler lost total amount: $" +totalStake);
         } else {
-            logger.info("After playing for 20 days Gambler won total amount: $" +totalStake);
+            System.out.println("After playing for 20 days Gambler won total amount: $" +totalStake);
         }
         logger.info(daysWonCount+ " Days won for a month \n" +daysLostCount+ " Days lost for a month");
     }
