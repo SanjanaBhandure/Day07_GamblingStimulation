@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import java.util.Random;
 
 public class GamblingStimulation {
-    static Logger logger = Logger.getLogger(GamblingStimulation.class);
+    static Logger logger = Logger.getLogger(GamblingStimulatorUC5.class);
     /*Static Variables created*/
     public static final int STAKE_PER_DAY = 100;            //Stake per Day
     public static final int BET_PER_GAME = 1;               //Bet per game
@@ -67,6 +67,7 @@ public class GamblingStimulation {
         } else {
             logger.info("After playing for 20 days Gambler won total amount: $" +totalStake);
         }
+        logger.info(daysWonCount+ " Days won for a month \n" +daysLostCount+ " Days lost for a month");
     }
 
     public static void main(String[] args) {
