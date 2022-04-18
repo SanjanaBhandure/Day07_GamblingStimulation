@@ -35,18 +35,18 @@ public class GamblingStimulation {
      */
 
     public static void resignDayCheck() {
+        int totalStake = 0;
         stake = 0;
         while (stake != 50 && stake != -50) {
             winCheck();
         }
-        logger.info("Total stake for resign for a day is: " +stake);
-
+        totalStake = stake + STAKE_PER_DAY;
+        logger.info("Total stake for resign for a day is: " +totalStake);
     }
 
     /*
      * After 20 days of playing every day would like to know the total amount won or
      * lost.
-     * Each month would like to know the days won and lost and by how much.
      */
 
     public static void monthlyWinOrLossCheck() {
@@ -62,10 +62,12 @@ public class GamblingStimulation {
                 totalStake = totalStake + stake;
             }
         }
-        logger.info("After playing for 20 days Gambler won total amount: $" +totalStake);
-        logger.info(daysWonCount+ " Days won for a month \n" +daysLostCount+ " Days lost for a month");
+        if (totalStake < 0) {
+            logger.info("After playing for 20 days Gambler lost total amount: $" +totalStake);
+        } else {
+            logger.info("After playing for 20 days Gambler won total amount: $" +totalStake);
+        }
     }
-
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
