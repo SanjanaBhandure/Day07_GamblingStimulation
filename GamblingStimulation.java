@@ -5,16 +5,16 @@ import java.util.Random;
 
 public class GamblingStimulation {
     static Logger logger = Logger.getLogger(GamblingStimulation.class);
-    /*
-     * Static Variables STAKE_PER_DAY and BET_PER_GAME created
-     */
-    public static final int STAKE_PER_DAY = 100;     // Stake per day
-    public static final int BET_PER_GAME = 1;        //Bet per game
+    /*Static Variables created*/
+    public static final int STAKE_PER_DAY = 100;            //Stake per Day
+    public static final int BET_PER_GAME = 1;               //Bet per game
     public static final int WIN = 1;
-    public static int stake = 0;                     //Initial gambler bets with 1
+    public static int stake = 0;                            //Initial gambler bets with 1
+    static int daysWonCount = 0;
+    static int daysLostCount = 0;
 
     /*
-     * winCheck method will check if gambler wins or loss the game
+     * winCheck function will check if gambler wins or loss
      */
 
     public static void winCheck() {
@@ -23,14 +23,10 @@ public class GamblingStimulation {
         if (betReturns == WIN) {
             // incrementing
             stake++;
-            logger.info("Congratulations you Win!!!");
         } else {
             // decrementing
             stake--;
-            logger.info("You loss the Game!!!");
         }
-        logger.info("Stake: " +stake);
-
     }
 
     /*
@@ -40,17 +36,38 @@ public class GamblingStimulation {
 
     public static void resignDayCheck() {
         int totalStake = 0;
+        stake = 0;
         while (stake != 50 && stake != -50) {
             winCheck();
         }
         totalStake = stake + STAKE_PER_DAY;
         logger.info("Total stake for resign for a day is: " +totalStake);
+    }
 
+    /*
+     * After 20 days of playing every day would like to know the total amount won or
+     * lost.
+     */
+
+    public static void monthlyWinOrLossCheck() {
+        int day, totalStake = 0;
+        for (day = 1; day <= 20; day++) {
+            logger.info("Day: " +day);
+            resignDayCheck();
+            if (stake == 50) {
+                daysWonCount++;
+                totalStake = totalStake + stake;
+            } else if (stake == -50) {
+                daysLostCount++;
+                totalStake = totalStake + stake;
+            }
+        }
+        logger.info("After playing for 20 days Gambler won total amount: $" +totalStake);
     }
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
         logger.info("Welcome to Gambling Simulation");
-        resignDayCheck();
+        monthlyWinOrLossCheck();
     }
 }
